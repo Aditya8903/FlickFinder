@@ -3,15 +3,15 @@ import "./style.scss";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 import { useSelector } from "react-redux";
-import Img from "../../../components/lazyLoadImage/Img";
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 
 const HeroBanner = () => {
   const navigate = useNavigate();
-  const [background, setBackgroud] = useState("");
+  const [background, setBackground] = useState("");
   const [query, setQuery] = useState("");
   const { data, loading } = useFetch("/movie/popular");
   const { url } = useSelector((state) => state.home);
+
   const searchQueryHandler = () => {
     if (query.trim().length > 0) {
       navigate(`/search/${query}`);
@@ -28,13 +28,24 @@ const HeroBanner = () => {
     const bg =
       url.backdrop +
       data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path;
-    setBackgroud(bg);
+    setBackground(bg);
+
+    // Preload the hero banner image
+    const preLoadImage = new Image();
+    preLoadImage.src = bg;
   }, [data]);
+
   return (
     <div className="heroBanner">
       {!loading && (
         <div className="backdrop-img">
-          <Img src={background} />
+          <img
+            src={background}
+            alt="Hero Banner"
+            onError={(e) => {
+              e.target.src = "flickfinder-high-resolution-logo-transparent.png"; // Replace with your fallback image path
+            }}
+          />
         </div>
       )}
 
@@ -50,9 +61,9 @@ const HeroBanner = () => {
               type="text"
               placeholder="Search for a movie or tv show...."
               onChange={(e) => setQuery(e.target.value)}
-              onKeyUp={searchQueryHandler}
+              onKeyUp={handleKeyPress}
             />
-            <button>Search</button>
+            <button onClick={searchQueryHandler}>Search</button>
           </div>
         </div>
       </ContentWrapper>
