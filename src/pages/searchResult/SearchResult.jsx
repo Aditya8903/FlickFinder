@@ -1,6 +1,6 @@
 import "./style.scss";
 const SearchResult = () => {
-  return <div></div>;
+  return <div>searchResult</div>;
 };
 
 export default SearchResult;
