@@ -1,13 +1,16 @@
 @import "../../../mixins.scss";
+
 .heroBanner {
   width: 100%;
   height: 450px;
   display: flex;
   align-items: center;
   position: relative;
+
   @include md {
     height: 700px;
   }
+
   .backdrop-img {
     position: absolute;
     overflow: hidden;
@@ -16,13 +19,15 @@
     top: 0;
     left: 0;
     opacity: 0.4;
+
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover; // This ensures the image covers the entire area
+      object-fit: cover; // Ensures the image covers the entire area
       object-position: center;
     }
   }
+
   .opacity-layer {
     width: 100%;
     height: 250px;
@@ -31,7 +36,54 @@
     bottom: 0;
     left: 0;
   }
+
   .heroBannerContent {
     position: relative;
+    z-index: 1; // Ensures the content is above the background image
+    color: white;
+
+    .title {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      display: block;
+      justify-content: center;
+    }
+
+    .subTitle {
+      font-size: 18px;
+      opacity: 0.8;
+      margin-bottom: 30px;
+    }
+
+    .searchInput {
+      display: flex;
+      align-items: center;
+
+      input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-right: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
   }
 }

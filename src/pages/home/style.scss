@@ -1,4 +1,13 @@
-// set text color to white
-h1 {
-  color: white; // Set text color to white for all div elements
+.carouselSection {
+  position: relative;
+  margin-bottom: 70px;
+  & > .contentWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .carouselTitle {
+    color: white;
+  }
 }
